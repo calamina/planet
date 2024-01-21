@@ -1,8 +1,11 @@
 {
   "dependencies": {
+    "gsap": "^3.12.4",
     "three": "^0.159.0"
   },
   "devDependencies": {
-    "vite": "^5.0.10"
+    "lil-gui": "^0.19.1",
+    "vite": "^5.0.10",
+    "vite-plugin-glsl": "^1.2.1"
   }
 }

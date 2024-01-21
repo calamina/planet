@@ -1,0 +1,76 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tifinagh&display=swap');
+
+/* RESET */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+input, button, textarea, select {
+  font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+#root, #__next {
+  isolation: isolate;
+}
+
+/* STYLE */
+body {
+  margin: 0;
+  padding: 1rem;
+  background-color: #130d1c;
+  overflow-x: hidden;
+  height: fit-content;
+  scroll-behavior: smooth;
+  height: 100vh;
+}
+#container {
+  position: fixed;
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text {
+  color: #bbaadd66;
+  margin-left: 50vw;
+  width: 50vw;
+  padding: 2rem;
+  overflow-x: hidden;
+  font-family: monospace;
+}
+.test {
+  color: #bbaadd66;
+  margin-left: 50vw;
+  width: 50vw;
+  padding: 3rem;
+  overflow-x: hidden;
+  font-family: monospace;
+}
+p {
+  padding-bottom: 2rem;
+  font-size: 1.5rem;
+  font-size: 2.5rem;
+}
+h2 {
+  font-family: 'Noto Sans Tifinagh', sans-serif;
+  font-size: 5rem;
+}
+
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */    
+
+}
