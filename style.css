@@ -1,5 +1,7 @@
 /* FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tifinagh&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tifinagh&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Rubik&display=swap');
 
 /* RESET */
 *, *::before, *::after {
@@ -28,45 +30,78 @@ p, h1, h2, h3, h4, h5, h6 {
 
 /* STYLE */
 body {
-  margin: 0;
-  padding: 1rem;
   background-color: #130d1c;
-  overflow-x: hidden;
-  height: fit-content;
   scroll-behavior: smooth;
-  height: 100vh;
 }
 #container {
   position: fixed;
-  width: 50vw;
+  /* width: 50vw; */
+  transform: translateX(50%);
+  height: 100vh;
+  /* height: 50vh; */
+}
+.intro, .intro2 {
+  height: 100vh;
+}
+.intro-fixed {
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+}
+.intro-element {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.intro-element p {
+  color: #bbaadd66;
+}
+.grid {
+  margin-left: 50vw;
+  width: 50vw;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.grid-element {
+  background-color: #bbaadd11;
+  aspect-ratio: 1;
+  border-radius: 1rem;
 }
 .text {
   color: #bbaadd66;
   margin-left: 50vw;
   width: 50vw;
-  padding: 2rem;
   overflow-x: hidden;
   font-family: monospace;
+  padding: 1rem;
 }
 .test {
   color: #bbaadd66;
-  margin-left: 50vw;
   width: 50vw;
-  padding: 3rem;
   overflow-x: hidden;
   font-family: monospace;
+  padding: 1rem;
 }
 p {
-  padding-bottom: 2rem;
-  font-size: 1.5rem;
-  font-size: 2.5rem;
+  font-size: 1.4rem;
+  word-wrap: break-word;
+  font-family: 'Rubik', sans-serif;
+}
+p:not(:last-of-type) {
+  padding-bottom: 1rem;
 }
 h2 {
-  font-family: 'Noto Sans Tifinagh', sans-serif;
-  font-size: 5rem;
+  font-family: 'Climate Crisis', sans-serif;
+  padding-bottom: 1rem;
+  font-size: 3rem;
+}
+h2:not(:first-of-type) {
+  padding-top: 1rem;
 }
 
 * {

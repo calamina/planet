@@ -4,6 +4,7 @@
     "three": "^0.159.0"
   },
   "devDependencies": {
+    "eslint": "^8.56.0",
     "lil-gui": "^0.19.1",
     "vite": "^5.0.10",
     "vite-plugin-glsl": "^1.2.1"
