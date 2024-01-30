@@ -1,6 +1,5 @@
 /* FONTS */
 /* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tifinagh&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Rubik&display=swap');
 
 /* RESET */
@@ -34,34 +33,58 @@ body {
   scroll-behavior: smooth;
 }
 #container {
+  z-index: 1;
   position: fixed;
-  /* width: 50vw; */
-  transform: translateX(50%);
+  width: 100vw;
   height: 100vh;
-  /* height: 50vh; */
+  animation: appear 1.5s ease-in-out;
 }
-.intro, .intro2 {
-  height: 100vh;
-}
-.intro-fixed {
+.intro {
   width: 100vw;
   height: 100vh;
   padding: 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
-.intro-element {
-  height: 100%;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
+h1 {
+  position: fixed;
+  font-family: 'Climate Crisis', sans-serif;
+  font-size: 15rem;
+  color: #bbaaddcc;
+  font-variant: small-caps;
+  padding: 1rem;
+  animation: appear-slide-top .75s ease-in-out;
 }
-.intro-element p {
+/* .title {
+  position: fixed;
+  bottom: 12rem;
+  font-family: 'Climate Crisis', sans-serif;
+  font-size: 10rem;
   color: #bbaadd66;
+  padding: 1rem;
+  animation: appear-slide .75s ease-in-out;
+  animation-delay: .75s;
+} */
+.date {
+  position: fixed;
+  bottom: 0;
+  right: .5rem;
+  font-family: 'Climate Crisis', sans-serif;
+  font-size: 1.5rem;
+  color: #bbaadd66;
+  padding: 1rem;
+  animation: appear-slide-left .75s ease-in-out;
+}
+.content {
+  position: relative;
+  background-color: #130d1c;
+  z-index: 200;
+  width: 50vw;
+  margin-left: 50vw;
 }
 .grid {
-  margin-left: 50vw;
-  width: 50vw;
   padding: 1rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -73,16 +96,14 @@ body {
   border-radius: 1rem;
 }
 .text {
-  color: #bbaadd66;
-  margin-left: 50vw;
-  width: 50vw;
+  color: #bbaaddaa;
   overflow-x: hidden;
   font-family: monospace;
   padding: 1rem;
+  padding-bottom: 25rem;
 }
 .test {
-  color: #bbaadd66;
-  width: 50vw;
+  color: #bbaaddaa;
   overflow-x: hidden;
   font-family: monospace;
   padding: 1rem;
@@ -108,4 +129,37 @@ h2:not(:first-of-type) {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */    
 
+}
+
+
+/* ANIMATION */
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appear-slide-top {
+  0% {
+    transform: translateY(-5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes appear-slide-left {
+  0% {
+    transform: translateX(-2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

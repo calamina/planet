@@ -4,13 +4,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 // THREE
 const scene = new THREE.Scene()
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/2 / window.innerHeight, 0.1, 1000)
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000)
 const container = document.getElementById("container")
 
 const renderer = new THREE.WebGLRenderer({ antialias: true })
 renderer.setClearColor(0x000000, 0)
 renderer.setPixelRatio(window.devicePixelRatio)
-renderer.setSize(window.innerWidth/2, window.innerHeight)
+renderer.setSize(window.innerWidth, window.innerHeight)
 container.appendChild(renderer.domElement)
 
 window.addEventListener("resize", onWindowResize)
@@ -41,9 +41,9 @@ for (let i = 0; i < count; i++) {
   reference[i] = [x, y, z]
 }
 
-const aspect = window.innerWidth/2 / window.innerHeight
+const aspect = window.innerWidth / window.innerHeight
 
-camera.position.z = 6 * aspect
+camera.position.z = 2.5 * aspect
 
 function animate() {
   particles.rotateOnAxis(new THREE.Vector3( 0,1,0),0.005) 
@@ -53,10 +53,10 @@ function animate() {
 }
 
 function onWindowResize() {
-  camera.aspect = window.innerWidth/2 / window.innerHeight
+  camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth/2, window.innerHeight)
-  camera.position.z = 6 * aspect
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  camera.position.z = 5 * aspect
 }
 
 animate()
@@ -64,8 +64,34 @@ animate()
 // GSAP
 gsap.registerPlugin(ScrollTrigger)
 
-gsap.fromTo("#container", 
-  { xPercent: 0 },
+// Intro
+// gsap.from(".intro", { opacity: 0, y: -100, duration: 1}) 
+
+gsap.to(".intro", 
+{ ease: "power4.out",
+  scrollTrigger: { 
+    trigger: ".intro",
+    start: "top top",
+    end: "+=60%",
+    scrub: true 
+  }, 
+  opacity: 0,
+})
+// gsap.to(".title", 
+// { ease: "power4.out",
+//   scrollTrigger: { 
+//     trigger: ".intro",
+//     start: "top top",
+//     end: "+=60%",
+//     scrub: true 
+//   }, 
+//   fontSize: "1.5rem",
+//   top: '1rem',
+// })
+
+
+gsap.fromTo('#container', 
+  { x: 0 },
   { ease: "power4.out",
     scrollTrigger: { 
       trigger: ".intro",
@@ -73,21 +99,21 @@ gsap.fromTo("#container",
       end: "+=100%",
       scrub: true 
     }, 
-    xPercent: -50 
+    x: '-25%'
   }
 )
 
-gsap.fromTo("#container", 
-  { xPercent: -50 },
-  { ease: "power4.out",
-    scrollTrigger: {
-      trigger: ".intro2",
-      start: "top top",
-      end: "+=100%",
-      scrub: true   
-    }, 
-    xPercent: 50
-  })
+// gsap.fromTo("#container", 
+//   { xPercent: -50 },
+//   { ease: "power4.out",
+//     scrollTrigger: {
+//       trigger: ".intro2",
+//       start: "top top",
+//       end: "+=100%",
+//       scrub: true   
+//     }, 
+//     xPercent: 50
+//   })
 
 gsap.to(particles.geometry, 
   { ease: "power4.out",
@@ -137,7 +163,7 @@ gsap.to(particles.geometry, {
   },
   onUpdate: function () {
     camera.position.z = this.progress() == 0 
-      ? 6 * aspect
-      : 6 * aspect + (- this.progress() * 4.5)
+      ? 2.5 * aspect
+      : 2.5 * aspect + (- this.progress() * 4.5)
   }
 })
