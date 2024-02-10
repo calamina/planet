@@ -5,6 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 // THREE
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000)
+camera.position.z = 5
+
 const container = document.getElementById("container")
 
 const renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -15,14 +17,17 @@ container.appendChild(renderer.domElement)
 
 window.addEventListener("resize", onWindowResize)
 
+document.querySelector('.green').addEventListener("click", setColor('#6dea91'))
+document.querySelector('.pink').addEventListener("click", setColor('#ea6d99'))
+document.querySelector('.gold').addEventListener("click", setColor('#eac76d'))
+
 // Geometry
 const particlesGeometry = new THREE.SphereGeometry(2, 64, 64)
 
 // Material
-const particlesMaterial = new THREE.PointsMaterial({ color: 0xbbaadd })
-// particlesMaterial.size = 0.005
-// particlesMaterial.size = 0.02
-particlesMaterial.size = 0.01
+// const particlesMaterial = new THREE.PointsMaterial({ color: 0xbbaadd })
+const particlesMaterial = new THREE.PointsMaterial({ color: 0xea6d99 })
+particlesMaterial.size = 0.002
 particlesMaterial.sizeAttenuation = true
 
 // Points
@@ -41,10 +46,6 @@ for (let i = 0; i < count; i++) {
   reference[i] = [x, y, z]
 }
 
-const aspect = window.innerWidth / window.innerHeight
-
-camera.position.z = 2.5 * aspect
-
 function animate() {
   particles.rotateOnAxis(new THREE.Vector3( 0,1,0),0.005) 
   particles.geometry.attributes.position.needsUpdate = true
@@ -56,7 +57,15 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
-  camera.position.z = 5 * aspect
+  camera.position.z = 5
+}
+
+function setColor(color) {
+  var r = document.querySelector(':root');
+  return function () {
+    particlesMaterial.color.set(color)
+    r.style.setProperty('--color-main', color);
+  }
 }
 
 animate()
@@ -64,31 +73,33 @@ animate()
 // GSAP
 gsap.registerPlugin(ScrollTrigger)
 
-// Intro
-// gsap.from(".intro", { opacity: 0, y: -100, duration: 1}) 
+const load = gsap.timeline()
+load.to(".loading", {
+  delay: 3,
+  duration: .75,
+  transform: "translateY(100%)", 
+  onComplete: function () {
+    document.body.classList.remove('noscroll')
+  },
+})
+load.to(".loading", {
+  duration: 0,
+  display: "none", 
+})
 
-gsap.to(".intro", 
+gsap.to(".title",
 { ease: "power4.out",
   scrollTrigger: { 
     trigger: ".intro",
     start: "top top",
-    end: "+=60%",
-    scrub: true 
+    end: "+=30%",
+    scrub: true,
   }, 
-  opacity: 0,
+  y: '-100%',
+  // opacity: 0,
+  // transform: "scaleY(-1)",
+  // filter: "blur(10px)",
 })
-// gsap.to(".title", 
-// { ease: "power4.out",
-//   scrollTrigger: { 
-//     trigger: ".intro",
-//     start: "top top",
-//     end: "+=60%",
-//     scrub: true 
-//   }, 
-//   fontSize: "1.5rem",
-//   top: '1rem',
-// })
-
 
 gsap.fromTo('#container', 
   { x: 0 },
@@ -99,21 +110,10 @@ gsap.fromTo('#container',
       end: "+=100%",
       scrub: true 
     }, 
+    transform: "rotate(360deg)",
     x: '-25%'
   }
 )
-
-// gsap.fromTo("#container", 
-//   { xPercent: -50 },
-//   { ease: "power4.out",
-//     scrollTrigger: {
-//       trigger: ".intro2",
-//       start: "top top",
-//       end: "+=100%",
-//       scrub: true   
-//     }, 
-//     xPercent: 50
-//   })
 
 gsap.to(particles.geometry, 
   { ease: "power4.out",
@@ -163,7 +163,7 @@ gsap.to(particles.geometry, {
   },
   onUpdate: function () {
     camera.position.z = this.progress() == 0 
-      ? 2.5 * aspect
-      : 2.5 * aspect + (- this.progress() * 4.5)
+      ? 5
+      : 5 + (- this.progress() * 4.5)
   }
 })
