@@ -25,9 +25,8 @@ document.querySelector('.gold').addEventListener("click", setColor('#eac76d'))
 const particlesGeometry = new THREE.SphereGeometry(2, 64, 64)
 
 // Material
-// const particlesMaterial = new THREE.PointsMaterial({ color: 0xbbaadd })
 const particlesMaterial = new THREE.PointsMaterial({ color: 0xea6d99 })
-particlesMaterial.size = 0.002
+particlesMaterial.size = 0.01
 particlesMaterial.sizeAttenuation = true
 
 // Points
@@ -47,7 +46,7 @@ for (let i = 0; i < count; i++) {
 }
 
 function animate() {
-  particles.rotateOnAxis(new THREE.Vector3( 0,1,0),0.005) 
+  particles.rotateY(0.005) 
   particles.geometry.attributes.position.needsUpdate = true
   renderer.render(scene, camera)
   requestAnimationFrame(animate)
@@ -67,6 +66,28 @@ function setColor(color) {
     r.style.setProperty('--color-main', color);
   }
 }
+
+const el = document.querySelector('.intro')
+const el2 = document.querySelector('.part1')
+const el3 = document.querySelector('.part2')
+const links = document.querySelectorAll('.link')
+
+const observer = new window.IntersectionObserver(([entry]) => {
+  if (entry.isIntersecting) {
+    links.forEach(link => link.classList.remove('active'))
+    if(entry.target.classList.contains('intro')) links[0].classList.add('active')
+    if(entry.target.classList.contains('part1')) links[1].classList.add('active')
+    if(entry.target.classList.contains('part2')) links[2].classList.add('active')
+    return
+  }
+}, {
+  root: null,
+  threshold: 0.1, // set offset 0.1 means trigger if atleast 10% of element in viewport
+})
+
+observer.observe(el);
+observer.observe(el2);
+observer.observe(el3);
 
 animate()
 
@@ -95,10 +116,10 @@ gsap.to(".title",
     end: "+=30%",
     scrub: true,
   }, 
-  y: '-100%',
-  // opacity: 0,
-  // transform: "scaleY(-1)",
-  // filter: "blur(10px)",
+  y: '-0.5rem',
+  filter: "blur(3px)",
+  opacity: 0,
+  display: "none",
 })
 
 gsap.fromTo('#container', 
@@ -147,8 +168,8 @@ gsap.to(particles.geometry,
       }
 
       this.scrollTrigger.direction === 1
-        ? particles.rotateOnAxis(new THREE.Vector3( 0,1,0),0.01)
-        : particles.rotateOnAxis(new THREE.Vector3( 0,1,0), particles.rotation.z/75 - 0.0005)
+        ? particles.rotateY(0.01)
+        : particles.rotateY(particles.rotation.z/75 - 0.0005)
     }
   })
 
