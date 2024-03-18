@@ -1,3 +1,7 @@
-# planet
-three js tests
-![image](https://github.com/calamina/planet/assets/5458121/810309ac-88d8-4a84-84d5-5adbe84f3b1f)
+# Planet
+[Link to preview](https://planet-blue.vercel.app)
+Threejs project displaying a planet reacting to user scroll.
+
+![screen](/planet.png?raw=true "planet")
+![screen](/planet2.png?raw=true "planet2")
+![screen](/planet3.png?raw=true "planet3")
